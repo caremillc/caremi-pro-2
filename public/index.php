@@ -1,5 +1,6 @@
 <?php declare(strict_types=1); 
 use Careminate\Http\Kernel;
+use Careminate\Routing\Router;
 use Careminate\Http\Requests\Request;
 use Careminate\Http\Responses\Response;
 
@@ -18,8 +19,12 @@ require BASE_PATH . '/bootstrap/performance.php';
 // request received
 $request = Request::createFromGlobals();
 
+require route_path('web.php');
+//instantiate router
+$router = new Router();
+
 // Initializes the application's kernel 
-$kernel = new Kernel();
+$kernel = new Kernel($router);
 
 // send response (string of content)
 $response = $kernel->handle($request);
@@ -31,4 +36,3 @@ dd($response);
 
 // send response (string of content)
 // echo 'Hello World';
-
