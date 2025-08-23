@@ -19,12 +19,15 @@ require BASE_PATH . '/bootstrap/performance.php';
 // request received
 $request = Request::createFromGlobals();
 
+$container = require BASE_PATH . '/config/container.php';
+
 require route_path('web.php');
 //instantiate router
 $router = new Router();
 
 // Initializes the application's kernel 
-$kernel = new Kernel($router);
+//$kernel = new Kernel($router);
+$kernel = $container->get(Kernel::class);
 
 // send response (string of content)
 $response = $kernel->handle($request);
@@ -32,7 +35,7 @@ $response = $kernel->handle($request);
 $response->send();
 
 // send response (string of content)
-dd($response);
+// dd($response);
 
 // send response (string of content)
 // echo 'Hello World';
