@@ -41,7 +41,7 @@ $container->add(Careminate\Http\Kernel::class)
           ->addArgument(Careminate\Routing\Contracts\RouterInterface::class)
           ->addArgument($container);
 
-          // Register the Twig FilesystemLoader as a shared (singleton) service.
+// Register the Twig FilesystemLoader as a shared (singleton) service.
 // It will use the provided $templatesPath as the base directory for template files.
 $container->addShared('filesystem-loader', \Twig\Loader\FilesystemLoader::class)
     ->addArgument(new \League\Container\Argument\Literal\StringArgument($templatesPath));
@@ -58,6 +58,20 @@ $container->add(\Careminate\Http\Controllers\AbstractController::class);
 // This injects the container itself into the controller, enabling dependency resolution within controllers.
 $container->inflector(\Careminate\Http\Controllers\AbstractController::class)
     ->invokeMethod('setContainer', [$container]);
+
+# start database connection
+$dbConfig = require BASE_PATH . '/config/database.php';
+$defaultDriver = $dbConfig['default'];
+$driverConfig = $dbConfig['drivers'][$defaultDriver];
+
+$container->add(Careminate\Databases\Dbal\Connections\Contracts\ConnectionInterface::class, Careminate\Databases\Dbal\Connections\ConnectionFactory::class)
+    ->addArgument($driverConfig);
+# Optional – Register DB Connection globally in container
+$container->addShared(\Doctrine\DBAL\Connection::class, function () use ($container) {
+    return $container->get(Careminate\Databases\Dbal\Connections\Contracts\ConnectionInterface::class)->create();
+});
+
+# end database connection
 
 // dd($container);
 return $container;
