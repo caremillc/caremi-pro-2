@@ -1,0 +1,24 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block main %}
+    <form action="/posts/store" method="post" enctype="multipart/form-data">
+    
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" required>
+            <div id="titleHelp" class="form-text">Give your post a catchy title.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload Image</label>
+            <input name="image" type="file" class="form-control" id="image" accept="image/*" required>
+            <div id="imageHelp" class="form-text">Choose an image to upload with your post.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
