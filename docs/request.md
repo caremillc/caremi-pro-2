@@ -276,8 +276,8 @@ if ($request->isPost() && $request->wantsJson()) {
 ```
 
 # Request Helper 
-* [request\helper](.\request_helper.md)
-* [request\arr](.\arr.md)
-* [request\arr](.\str.md)
+* [request/helper](./request_helper.md)
+* [request/arr](./arr.md)
+* [request/str](./str.md)
 
 ---

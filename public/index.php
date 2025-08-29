@@ -13,18 +13,24 @@ define('ROOT_DIR', dirname(__FILE__));
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 // bootstrapping
-// require BASE_PATH . '/bootstrap/app.php';
-// require BASE_PATH . '/bootstrap/performance.php';
+//require BASE_PATH . '/bootstrap/app.php';
+//require BASE_PATH . '/bootstrap/performance.php';
 
 // request received
 $request = Request::createFromGlobals();
 
+$container = require BASE_PATH . '/config/container.php';
+
 require route_path('web.php');
+
 //instantiate router
 $router = new Router();
 
+
 // Initializes the application's kernel 
-$kernel = new Kernel($router);
+//$kernel = new Kernel($router);
+$kernel = $container->get(Kernel::class);
+
 
 // send response (string of content)
 $response = $kernel->handle($request);
