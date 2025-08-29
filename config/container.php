@@ -1,4 +1,7 @@
 <?php  declare(strict_types=1); 
+// Load environment variables
+$dotenv = new \Symfony\Component\Dotenv\Dotenv();
+$dotenv->load(dirname(__DIR__) . '/.env');
 
 $container = new \League\Container\Container();
 
@@ -6,6 +9,16 @@ $container = new \League\Container\Container();
 $container->delegate(new \League\Container\ReflectionContainer(true));
 
 #parameters
+
+#env parameters
+$appEnv = env('APP_ENV', 'production'); // Default to 'production' if not set
+$appKey = env('APP_KEY'); // Default to 'production' if not set
+$appVersion = env('APP_VERSION');
+
+$container->add('APP_ENV', new \League\Container\Argument\Literal\StringArgument($appEnv));
+$container->add('APP_KEY', new \League\Container\Argument\Literal\StringArgument($appKey));
+$container->add('APP_VERSION', new \League\Container\Argument\Literal\StringArgument($appVersion));
+
 // Load application routes from an external configuration file.
 # get routes
 $routes = Careminate\Routing\Route::getRoutes();
