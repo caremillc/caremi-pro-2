@@ -1,6 +1,6 @@
-{% extends 'layouts/app.html.twig' %}
+@extends('layouts.app')
 
-{% block main %}
+@section('main')
     <form action="/posts/store" method="post" enctype="multipart/form-data">
     
         <div class="mb-3">
@@ -21,4 +21,4 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-{% endblock %}
+@endsection
