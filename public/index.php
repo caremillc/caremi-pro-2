@@ -1,6 +1,7 @@
 <?php declare(strict_types=1); // public/index.php
 
 use Careminate\Http\Requests\Request;
+use Careminate\Http\Responses\Response;
 
 // ---------------------------------------------------------
 // Define application constants
@@ -21,16 +22,16 @@ require BASE_PATH . '/bootstrap/performance.php';
 // request received
 $request = Request::createFromGlobals();
 
-// Then use it anywhere
-$user = ['name' => 'John', 'age' => 30];
-$data = new stdClass();
-$data->items = [1, 2, 3];
+// send response (string of content)
+$content = '<h1>Hello World from index page</h1>';
 
-dd($user, $data);
+$response = new Response(content: $content, status: 200, headers: []);
 
-dd($request);
+$response->send();
 
 // ---------------------------------------------------------
 // Log performance after response
 // ---------------------------------------------------------
 logExecutionTime();
+
+
