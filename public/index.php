@@ -22,4 +22,3 @@ echo 'Hello World from index.php'."</br>";
 // Log performance after response
 // ---------------------------------------------------------
 logExecutionTime();
-
