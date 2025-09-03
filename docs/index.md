@@ -236,3 +236,4 @@ public function index(Request $request)
 * Kernel centralizes request handling, and the front controller initializes the framework, handles the request, and sends the response.
 
 ---
+

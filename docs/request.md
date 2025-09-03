@@ -285,3 +285,5 @@ if ($request->isPost() && $request->wantsJson()) {
 * [String Utilities](./str.md)
 
 [Back to Top](#careminate-framework---request-class-documentation)
+
+🔗 [← Response Class](response.md) | [Back to Index](index.md)
