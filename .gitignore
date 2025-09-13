@@ -1,0 +1,9 @@
+#folders 
+/vendor/
+/framework-pro-2/
+
+#files
+.idea/
+.env
+notes.txt
+composer.lock
