@@ -72,6 +72,28 @@ $container->add(
         return $container->get(\Careminate\View\Engines\ViewManager::class);
     }
 );
+
+$container->add('flint',
+    \Careminate\View\Engines\Contracts\ViewEngineInterface::class,
+    function () use ($container) {
+        return $container->get(\Careminate\View\Engines\ViewManager::class);
+    }
+);
+
+/**
+ * Start AbstractController
+ */
+// Register the AbstractController so it can be resolved by the container.
+$container->add(\Careminate\Http\Controllers\AbstractController::class);
+
+// Automatically call the setContainer() method on any class that extends AbstractController
+// This injects the container itself into the controller, enabling dependency resolution within controllers.
+$container->inflector(\Careminate\Http\Controllers\AbstractController::class)
+    ->invokeMethod('setContainer', [$container]);
+   
+/**
+ * End AbstractController
+ */
 /**
  * End View Template
  */

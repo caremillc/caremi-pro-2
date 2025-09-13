@@ -53,4 +53,3 @@ class PostController extends Controller
         return new Response("<h1>Delete Post with ID: $id</h1>");
     }
 }
-
