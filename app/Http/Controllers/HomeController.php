@@ -1,22 +1,18 @@
-<?php declare(strict_types=1);
+<?php declare (strict_types = 1);
 namespace App\Http\Controllers;
 
-use Twig\Environment;
 use App\Widget\Widget;
-use Careminate\Http\Controllers\AbstractController;
-use Careminate\Http\Responses\Response;
 
-
-class HomeController extends AbstractController
+class HomeController
 {
     public function __construct(private Widget $widget)
     {
     }
-
-    public function index(): Response
+    public function index()
     {
-        $content = "<h1>Hello {$this->widget->name}</h1>";
-
-        return new Response($content);
+        return view('home.index', [
+            'title'   => 'Welcome to Careminate!',
+            'message' => 'This is a polished view() helper.',
+        ]);
     }
 }
