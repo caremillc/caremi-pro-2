@@ -237,5 +237,5 @@ public function index(Request $request)
 
 ---
 
-🔗 [← Response Class](response.md) |  [← Resquest Class](request.md) | [Back to Index](index.md)
+🔗 [← Response Class](./response.md) |  [← Resquest Class](./request.md) | [Back to Index](./index.md)
 
