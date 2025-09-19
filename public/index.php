@@ -1,6 +1,7 @@
 <?php declare(strict_types=1); 
 
 use Careminate\Http\Requests\Request;
+use Careminate\Http\Responses\Response;
 
 // ---------------------------------------------------------
 // Bootstrap the framework
@@ -13,14 +14,18 @@ require __DIR__ . '/../bootstrap/app.php';
 // request received
 $request = Request::createFromGlobals();
 
-// Then use it anywhere
-$user = ['name' => 'John', 'age' => 30];
-$data = new stdClass();
-$data->items = [1, 2, 3];
+// ---------------------------------------------------------
+// Handle the request (placeholder logic for now)
+// ---------------------------------------------------------
+// request received
+$request = Request::createFromGlobals();
 
-dd($user, $data);
+// send response (string of content)
+$content = '<h1>Hello World from index page</h1>';
 
-dd($request);
+$response = new Response(content: $content, status: 200, headers: []);
+
+$response->send();
 
 // ---------------------------------------------------------
 // Log performance after response
