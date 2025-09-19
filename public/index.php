@@ -1,5 +1,6 @@
 <?php declare(strict_types=1); 
 
+use Careminate\Http\Kernel;
 use Careminate\Http\Requests\Request;
 use Careminate\Http\Responses\Response;
 
@@ -15,16 +16,21 @@ require __DIR__ . '/../bootstrap/app.php';
 $request = Request::createFromGlobals();
 
 // ---------------------------------------------------------
-// Handle the request (placeholder logic for now)
+// Handle the request
 // ---------------------------------------------------------
-// request received
 $request = Request::createFromGlobals();
 
-// send response (string of content)
-$content = '<h1>Hello World from index page</h1>';
+// Initializes the application's kernel 
+$kernel = new Kernel();
 
-$response = new Response(content: $content, status: 200, headers: []);
+// Generate response
+$response = $kernel->handle($request);
 
+
+// For debugging (optional, remove in production)
+// dd($kernel, $request);
+
+// Send the response to client
 $response->send();
 
 // ---------------------------------------------------------
