@@ -1,23 +1,63 @@
 <?php declare(strict_types=1);
 
 use Careminate\Http\Requests\Request;
+use Careminate\Exceptions\AuthException;
+use Careminate\Exceptions\Handler;
 
 // ---------------------------------------------------------
 // Bootstrap the framework
 // ---------------------------------------------------------
 require __DIR__ . '/../bootstrap/app.php';
 
+
 // ---------------------------------------------------------
-// Handle the request (placeholder logic for now)
+// Exception handling examples
 // ---------------------------------------------------------
-// request received
+try {
+    // ---------------------------------------------------------
+// Handle the request (placeholder)
+// ---------------------------------------------------------
 $request = Request::createFromGlobals();
 
-// Then use it anywhere
-// Then use it anywhere
-$user = ['name' => 'John', 'age' => 30];
-$data = new stdClass();
-$data->items = [1, 2, 3];
+    throw new RuntimeException("A runtime exception occurred!");
+} catch (\Throwable $e) {
+    logException($e); // Logs to errors channel
+}
 
-// dump everything at once (single dd stops execution)
-dd($user, $data, $request);
+// // Custom AuthException
+// try {
+//     throw new AuthException("Invalid credentials", 401, ['username' => 'john.doe']);
+// } catch (\Throwable $e) {
+//     logException($e); // Logs to security channel
+// }
+
+// // ---------------------------------------------------------
+// // High-severity log triggers alerts
+// // ---------------------------------------------------------
+// logger('errors')->critical('Critical system failure!', ['server' => 'web-01']);
+
+// // ---------------------------------------------------------
+// // Logging examples
+// // ---------------------------------------------------------
+
+// // Default channel
+// logger('default')->info('Application booted successfully');
+// logger('default')->debug('Debugging information', ['request_uri' => $_SERVER['REQUEST_URI']]);
+
+// // Database channel
+logger('errors')->info('Database connected');
+logger('errors')->error('Query failed', ['sql' => 'SELECT * FROM users']);
+
+// // Security channel
+// logger('security')->warning('User login attempt failed', ['user' => 'guest']);
+// logger('security')->info('User accessed dashboard', ['user_id' => 123]);
+
+// // ---------------------------------------------------------
+// // Output debug info
+// // ---------------------------------------------------------
+// echo "<h2>Logger & Exception Test Completed</h2>";
+// echo "<pre>Request Data:\n";
+// print_r($request->all());
+// echo "</pre>";
+
+// echo "<pre>Check 'storage/logs/' for log files and alerts (emails/Slack) if configured.</pre>";
