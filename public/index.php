@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Careminate\Http\Kernel;
 use Careminate\Exceptions\Handler;
 use Careminate\Http\Requests\Request;
 use Careminate\Http\Responses\Response;
@@ -15,17 +16,25 @@ require __DIR__ . '/../bootstrap/app.php';
 // Exception handling examples
 // ---------------------------------------------------------
 try {
-    // ---------------------------------------------------------
-// Handle the request (placeholder)
+
+// ---------------------------------------------------------
+// Handle the request
 // ---------------------------------------------------------
 $request = Request::createFromGlobals();
 
-// send response (string of content)
-$content = '<h1>Hello World from index page</h1>';
+// Initializes the application's kernel 
+$kernel = new Kernel();
 
-$response = new Response(content: $content, status: 200, headers: []);
+// Generate response
+$response = $kernel->handle($request);
 
+
+// For debugging (optional, remove in production)
+dd($kernel, $request);
+
+// Send the response to client
 $response->send();
+
 
     // throw new RuntimeException("A runtime exception occurred!");
 } catch (\Throwable $e) {
@@ -69,5 +78,4 @@ $response->send();
 // echo "</pre>";
 
 // echo "<pre>Check 'storage/logs/' for log files and alerts (emails/Slack) if configured.</pre>";
-
 
