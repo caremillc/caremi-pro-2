@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-use Careminate\Http\Requests\Request;
-use Careminate\Exceptions\AuthException;
 use Careminate\Exceptions\Handler;
+use Careminate\Http\Requests\Request;
+use Careminate\Http\Responses\Response;
+use Careminate\Exceptions\AuthException;
 
 // ---------------------------------------------------------
 // Bootstrap the framework
@@ -19,7 +20,14 @@ try {
 // ---------------------------------------------------------
 $request = Request::createFromGlobals();
 
-    throw new RuntimeException("A runtime exception occurred!");
+// send response (string of content)
+$content = '<h1>Hello World from index page</h1>';
+
+$response = new Response(content: $content, status: 200, headers: []);
+
+$response->send();
+
+    // throw new RuntimeException("A runtime exception occurred!");
 } catch (\Throwable $e) {
     logException($e); // Logs to errors channel
 }
@@ -45,8 +53,8 @@ $request = Request::createFromGlobals();
 // logger('default')->debug('Debugging information', ['request_uri' => $_SERVER['REQUEST_URI']]);
 
 // // Database channel
-logger('errors')->info('Database connected');
-logger('errors')->error('Query failed', ['sql' => 'SELECT * FROM users']);
+// logger('errors')->info('Database connected');
+// logger('errors')->error('Query failed', ['sql' => 'SELECT * FROM users']);
 
 // // Security channel
 // logger('security')->warning('User login attempt failed', ['user' => 'guest']);
@@ -61,3 +69,5 @@ logger('errors')->error('Query failed', ['sql' => 'SELECT * FROM users']);
 // echo "</pre>";
 
 // echo "<pre>Check 'storage/logs/' for log files and alerts (emails/Slack) if configured.</pre>";
+
+

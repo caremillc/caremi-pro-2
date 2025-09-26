@@ -206,3 +206,30 @@ Convert string to URL-friendly slug.
 ```php
 Str::slug('Hello World!'); // 'hello-world'
 ```
+
+### Str::slugify($value);
+
+Use \Normalizer from the intl extension if available.
+
+Transliterate text with transliterator_transliterate() or iconv().
+
+Remove diacritics & unwanted characters.
+
+Support options (separator, limit, lowercase, ascii/unicode).
+
+Be safe and modern.
+
+```php 
+
+echo slugify("Hello, World!");                     
+// hello-world
+
+echo slugify("Æther & Œuvre");                     
+// aether-oeuvre
+
+echo slugify("東京タワー", ['ascii' => false]);     
+// 東京タワー
+
+echo slugify("Résumé de Félix", ['limit' => 12]);  
+// resume-de-fe
+```

@@ -252,3 +252,27 @@ For CLI output, exceptions are displayed in plain text; for web, they are wrappe
 
 Check storage/logs/ regularly to ensure logs are being written and rotated correctly.
 
+# Usage Example
+
+Register channels at app boot (e.g., in a ServiceProvider):
+```php 
+<?php 
+use Careminate\Logging\AlertManager;
+use Careminate\Logging\EmailChannel;
+use Careminate\Logging\SlackChannel;
+
+AlertManager::registerChannel(new EmailChannel());
+AlertManager::registerChannel(new SlackChannel());
+
+
+?>
+```
+# Then anywhere in the app:
+```php 
+<?php 
+
+AlertManager::send('error', 'database', 'Database connection failed.');
+
+
+?>
+```
