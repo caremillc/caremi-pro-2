@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
 use Careminate\Http\Kernel;
-use Careminate\Routing\Router;
 use Careminate\Http\Requests\Request;
 
 // ---------------------------------------------------------
@@ -10,27 +9,19 @@ use Careminate\Http\Requests\Request;
 require __DIR__ . '/../bootstrap/app.php';
 
 try {
-// ---------------------------------------------------------
-// Handle the request (placeholder logic for now)
-// ---------------------------------------------------------
-// request received
-$request = Request::createFromGlobals();
+    $request = Request::createFromGlobals();
 
-//instantiate router
-$router = new Router();
+    // Get container
+    $container = require BASE_PATH . '/config/container.php';
 
-// Initializes the application's kernel 
-$kernel = new Kernel($router);
+    // Resolve kernel (with router injected automatically)
+    $kernel = $container->get(Kernel::class);
 
-// send response (string of content)
-$response = $kernel->handle($request);
+    // Handle request
+    $response = $kernel->handle($request);
+    
+    $response->send();
 
-$response->send();
-
-// dd($response);
-
-    // throw new RuntimeException("A runtime exception occurred!");
 } catch (\Throwable $e) {
-    logException($e); // Logs to errors channel
+    logException($e);
 }
-
